@@ -67,7 +67,9 @@ def process_image(image):
             current_tone_name = tone_name
             
             # Draw rectangle with detected color on the display image
-            cv2.rectangle(display_image, (10, 10), (50, 50), dominant_color[::-1], -1)  # BGR to RGB conversion
+            # Convert dominant_color to the correct format for OpenCV rectangle
+            bgr_color = (int(dominant_color[2]), int(dominant_color[1]), int(dominant_color[0]))
+            cv2.rectangle(display_image, (10, 10), (50, 50), bgr_color, -1)
             
             # Write skin tone name on the display image
             cv2.putText(display_image, f"Tone: {tone_name}", (60, 30), 
